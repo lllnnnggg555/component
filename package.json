@@ -5,11 +5,16 @@
   "main": "lib/index.js",
   "module": "module/index.js",
   "modern": "modern/index.js",
+  "files": [
+    "lib",
+    "module",
+    "modern"
+  ],
   "scripts": {
-    "build": "npm run lint && npm run lib && npm run module && npm run modern",
-    "lib": "cross-env BABEL_ENV=lib babel ./src --out-dir ./lib --extensions .es6,.js,.es,.jsx,.mjs,.ts,.tsx",
-    "module": "cross-env BABEL_ENV=module babel ./src --out-dir ./module --extensions .es6,.js,.es,.jsx,.mjs,.ts,.tsx",
-    "modern": "cross-env BABEL_ENV=modern babel ./src --out-dir ./modern --extensions .es6,.js,.es,.jsx,.mjs,.ts,.tsx",
+    "build": "npm run lint && gulp",
+    "lib": "gulp lib",
+    "module": "gulp module",
+    "modern": "gulp modern",
     "umd": "rollup -c rollup.config.js",
     "lint": "eslint src/**/*.{js,jsx,ts,tsx}"
   },
@@ -35,7 +40,6 @@
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-import": "^1.11.2",
     "core-js": "^3.1.4",
-    "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-import": "^0.13.0",
     "eslint-config-standard": "^12.0.0",
@@ -45,6 +49,9 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-standard": "^4.0.0",
+    "fs-extra": "^8.1.0",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
     "minimist": "^1.2.0",
     "resolve": "^1.11.1",
     "rollup": "^1.16.7",

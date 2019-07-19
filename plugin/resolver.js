@@ -14,7 +14,7 @@ exports.resolve = function (source, file, config) {
       found: true,
       path: resolve.sync(source,
         {
-          extensions: ['.mjs', '.js', '.json'],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
           basedir: path.dirname(path.resolve(file))
         }
       )
