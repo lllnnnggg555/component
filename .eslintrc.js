@@ -17,7 +17,7 @@ module.exports = {
   'extends': [
     'standard',
     'standard-react',
-    'import'
+    'plugin:import/recommended'
   ],
   'rules': {
     'no-var': 2,

@@ -63,7 +63,7 @@ module.exports = {
       'libraryDirectory': 'es',
       'style': true
     }],
-    ['./plugin/replace-import-extensions.js', {
+    ['replace-import-extensions', {
       '.(js|jsx|ts|tsx)$': ''
     }]
   ]
