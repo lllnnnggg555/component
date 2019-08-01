@@ -1,6 +1,6 @@
 const path = require('path')
 const gulp = require('gulp')
-const fs =require('fs-extra')
+const fs = require('fs-extra')
 const babel = require('gulp-babel')
 
 function removeDir (dir) {
