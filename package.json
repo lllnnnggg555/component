@@ -1,7 +1,7 @@
 {
-  "name": "@gem-mine/library",
+  "name": "@gem-mine/component",
   "version": "1.0.0",
-  "description": "gem-mine-library",
+  "description": "gem-mine-component",
   "main": "lib/index.js",
   "module": "module/index.js",
   "modern": "modern/index.js",
@@ -12,16 +12,18 @@
   ],
   "scripts": {
     "build": "npm run lint && gulp",
+    "build:ts": "npm run lint && gulp build:ts",
     "lib": "gulp lib",
+    "lib:ts": "gulp lib:ts",
     "module": "gulp module",
+    "module:ts": "gulp module:ts",
     "modern": "gulp modern",
-    "umd": "rollup -c rollup.config.js",
-    "lint": "eslint src/**/*.{js,jsx,ts,tsx}"
+    "modern:ts": "gulp modern:ts",
+    "lint": "eslint src/**/*.{js,jsx,ts,tsx} && tsc --noEmit"
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
     "@sdp.nd/fish": "^3.4.0",
-    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   },
@@ -34,13 +36,11 @@
     "@babel/plugin-transform-runtime": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.3.3",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-import": "^1.11.2",
     "babel-plugin-replace-import-extensions": "^1.0.0",
-    "core-js": "^3.1.4",
     "eslint": "^5.16.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-config-standard-react": "^7.0.2",
@@ -52,19 +52,8 @@
     "fs-extra": "^8.1.0",
     "gulp": "^4.0.2",
     "gulp-babel": "^8.0.0",
-    "minimist": "^1.2.0",
+    "gulp-typescript": "^5.0.1",
     "resolve": "^1.11.1",
-    "rollup": "^1.17.0",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-commonjs": "^10.0.1",
-    "rollup-plugin-import-alias": "^1.0.10",
-    "rollup-plugin-less": "^1.1.2",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-svg-sprite": "^0.2.0",
-    "rollup-plugin-terser": "^5.1.1",
-    "rollup-plugin-typescript": "^1.0.1",
-    "rollup-plugin-visualizer": "^1.1.1",
-    "tslint": "^5.18.0",
     "typescript": "^3.5.3"
   }
 }

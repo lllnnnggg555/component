@@ -37,6 +37,3 @@ yarn-error.log*
 /module
 /modern
 /dist
-
-package-lock.json
-yarn.lock

@@ -4,16 +4,13 @@ module.exports = {
   'root': true,
   'parser': '@typescript-eslint/parser',
   'parserOptions': {
-    'ecmaVersion': 8,
+    'ecmaVersion': 10,
     'ecmaFeatures': {
-      'experimentalObjectRestSpread': true,
       'jsx': true
     },
-    'useJSXTextNode': true,
-    'project': './tsconfig.json',
     'sourceType': 'module'
   },
-  'plugins': ['react', '@typescript-eslint'],
+  'plugins': ['react', '@typescript-eslint', 'import'],
   'extends': [
     'standard',
     'standard-react',
@@ -22,8 +19,8 @@ module.exports = {
   'rules': {
     'no-var': 2,
     'no-debugger': 2,
-    'no-unused-vars': 0,
     'semi': [2, 'never'],
+    'no-unused-vars': 0,
     'linebreak-style': 0,
     'object-curly-newline': 0,
     'space-before-function-paren': 0,

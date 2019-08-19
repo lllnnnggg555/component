@@ -2,6 +2,7 @@ const path = require('path')
 const gulp = require('gulp')
 const fs = require('fs-extra')
 const babel = require('gulp-babel')
+const ts = require('gulp-typescript')
 
 function removeDir (dir) {
   return function (cb) {
@@ -18,26 +19,113 @@ function copyFileTo (dir) {
   }
 }
 
-function build (dir) {
+function build (dir, options = {}) {
   return function (cb) {
-    process.env.BABEL_ENV = dir
     gulp.src(path.resolve(__dirname, './src/**/*.?(js|jsx|ts|tsx)'))
-      .pipe(babel())
+      .pipe(babel(options))
       .pipe(gulp.dest(path.resolve(__dirname, `./${dir}`)))
     cb()
   }
 }
 
-const buildLib = gulp.series(removeDir('lib'), copyFileTo('lib'), build('lib'))
+function buildTS (dir, options, addition) {
+  return function (cb) {
+    let buildStream = gulp.src(path.resolve(__dirname, './src/**/*.?(js|jsx|ts|tsx)'))
+      .pipe(ts.createProject('tsconfig.json', options)())
+      .pipe(babel({
+        babelrc: false,
+        plugins: [
+          ['import', {
+            'libraryName': 'fish',
+            'libraryDirectory': 'es',
+            'style': true
+          }]
+        ]
+      }))
+    if (addition) {
+      buildStream = buildStream.pipe(addition)
+    }
+    buildStream.pipe(gulp.dest(path.resolve(__dirname, `./${dir}`)))
+    cb()
+  }
+}
+
+// --------------------------------- lib
+
+const cleanLib = gulp.series(removeDir('lib'), copyFileTo('lib'))
+
+const buildLib = gulp.series(cleanLib, build('lib', {
+  presets: [
+    [
+      '@babel/preset-env', {
+        modules: 'cjs'
+      }
+    ]
+  ],
+  plugins: [
+    'add-module-exports'
+  ]
+}))
 
 gulp.task('lib', buildLib)
 
-const buildModule = gulp.series(removeDir('module'), copyFileTo('module'), build('module'))
+const buildLibTS = gulp.series(cleanLib, buildTS('lib', { module: 'es6' }, ts.createProject('tsconfig.json', { module: 'commonjs' })()))
+
+gulp.task('lib:ts', buildLibTS)
+
+// ---------------------------------- module
+
+const cleanModule = gulp.series(removeDir('module'), copyFileTo('module'))
+
+const buildModule = gulp.series(cleanModule, build('module', {
+  presets: [
+    [
+      '@babel/preset-env', {
+        modules: false
+      }
+    ]
+  ]
+}))
 
 gulp.task('module', buildModule)
 
-const buildModern = gulp.series(removeDir('modern'), copyFileTo('modern'), build('modern'))
+const buildModuleTS = gulp.series(cleanModule, buildTS('module', {
+  outDir: './module',
+  target: 'es5',
+  module: 'es6'
+}))
+
+gulp.task('module:ts', buildModuleTS)
+
+// ---------------------------------- modern
+
+const cleanModern = gulp.series(removeDir('modern'), copyFileTo('modern'))
+
+const buildModern = gulp.series(cleanModern, build('modern', {
+  presets: [
+    [
+      '@babel/preset-env', {
+        targets: {
+          esmodules: true
+        },
+        modules: false
+      }
+    ]
+  ]
+}))
 
 gulp.task('modern', buildModern)
 
+const buildModernTS = gulp.series(cleanModern, buildTS('modern', {
+  outDir: './modern',
+  target: 'es6',
+  module: 'es6'
+}))
+
+gulp.task('modern:ts', buildModernTS)
+
+// ---------------------------------- build
+
 gulp.task('default', gulp.series(buildLib, buildModule, buildModern))
+
+gulp.task('build:ts', gulp.series(buildLibTS, buildModuleTS, buildModernTS))
