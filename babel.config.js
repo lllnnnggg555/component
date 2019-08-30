@@ -11,13 +11,8 @@ module.exports = {
     ['@babel/plugin-proposal-class-properties', {
       loose: true
     }],
-    ['import', {
-      'libraryName': 'fish',
-      'libraryDirectory': 'es',
-      'style': true
-    }],
     ['replace-import-extensions', {
-      '.(js|jsx|ts|tsx)$': ''
+      '\\.(js|jsx|ts|tsx)$': ''
     }]
   ]
 }

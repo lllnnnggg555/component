@@ -36,7 +36,7 @@ function buildTS (dir, options, addition) {
         babelrc: false,
         plugins: [
           ['import', {
-            'libraryName': 'fish',
+            'libraryName': '@sdp.nd/fish',
             'libraryDirectory': 'es',
             'style': true
           }]
