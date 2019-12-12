@@ -20,7 +20,8 @@
     "modern": "gulp modern",
     "modern:ts": "gulp modern:ts",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" && tsc --noEmit",
-    "test": "jest"
+    "test": "jest",
+    "doc": "docz dev"
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
@@ -42,6 +43,7 @@
     "babel-plugin-add-module-exports": "^1.0.2",
     "babel-plugin-import": "^1.11.2",
     "babel-plugin-replace-import-extensions": "^1.0.0",
+    "docz": "^2.1.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "eslint": "^6.7.2",
