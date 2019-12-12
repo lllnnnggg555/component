@@ -21,7 +21,8 @@
     "modern:ts": "gulp modern:ts",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" && tsc --noEmit",
     "test": "jest",
-    "doc": "docz dev"
+    "doc": "docz dev",
+    "umd": "rollup -c rollup.config.js"
   },
   "dependencies": {
     "@babel/runtime": "^7.5.5",
@@ -62,6 +63,13 @@
     "jest-environment-enzyme": "^7.1.2",
     "jest-enzyme": "^7.1.2",
     "resolve": "^1.11.1",
+    "rollup": "^1.27.10",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-terser": "^5.1.3",
+    "rollup-plugin-typescript": "^1.0.1",
+    "rollup-plugin-visualizer": "^3.3.0",
     "typescript": "^3.5.3"
   }
 }

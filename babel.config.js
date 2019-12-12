@@ -2,8 +2,7 @@ module.exports = api => {
   const presets = []
   let plugins = []
 
-  const isTest = api.env('test')
-  if (isTest) {
+  if (api.env('test')) {
     presets.push([
       '@babel/preset-env',
       {
@@ -16,6 +15,27 @@ module.exports = api => {
         {
           libraryName: 'antd',
           libraryDirectory: 'lib',
+          style: false
+        }
+      ]
+    ])
+  } else if (api.env('rollup')) {
+    presets.push([
+      '@babel/preset-env',
+      {
+        targets: {
+          esmodules: true
+        },
+        modules: false
+      }
+    ])
+
+    plugins = plugins.concat([
+      [
+        'import',
+        {
+          libraryName: 'antd',
+          libraryDirectory: 'es',
           style: false
         }
       ]
