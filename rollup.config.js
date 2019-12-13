@@ -12,7 +12,7 @@ const sdkName = 'Form' // 输出的全局变量名称
 export default {
   input: 'src/index',
   output: {
-    format: 'esm',
+    format: 'umd',
     name: sdkName,
     file: 'dist/index.js',
     globals: {

@@ -120,7 +120,19 @@ const buildModernTS = gulp.series(cleanModern, buildTS('modern', {
   outDir: './modern',
   target: 'es6',
   module: 'es6'
-}))
+}, babel({
+  babelrc: false,
+  presets: [
+    [
+      '@babel/preset-env', {
+        targets: {
+          esmodules: true
+        },
+        modules: false
+      }
+    ]
+  ]
+})))
 
 gulp.task('modern:ts', buildModernTS)
 
